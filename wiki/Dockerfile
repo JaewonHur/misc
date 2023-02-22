@@ -1,7 +1,5 @@
 FROM ubuntu:20.04
 
-# ARG port
-
 # Install Git, Apache2, PHP, and postfix
 RUN apt update \
  && DEBIAN_FRONTEND=noninteractive apt install -y \
@@ -19,8 +17,6 @@ RUN cd /var/www \
 
 RUN sed -i "12s|DocumentRoot /var/www/html|DocumentRoot /var/www/dokuwiki|" /etc/apache2/sites-enabled/000-default.conf \
  && sed -i "172s|AllowOverride None|AllowOverride All|" /etc/apache2/apache2.conf
- # && sed -i "5s|^Listen 80|Listen $port|" /etc/apache2/ports.conf \
- # && sed -i "1s|VirtualHost \*\:80|VirtualHost \*\:$port|" /etc/apache2/sites-enabled/000-default.conf
 
 # Launch script
 WORKDIR "/root"
